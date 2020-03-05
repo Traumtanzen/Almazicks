@@ -41,14 +41,16 @@ namespace Almazicks.Controllers
 
         // PUT: api/Quests/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] QuestDto QuestDto)
+        public async Task PutAsync(int id, [FromBody] QuestDto questDto)
         {
+            await _questService.UpdateQuestAsync(id, questDto);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<string> DeleteAsync(int id)
         {
+            return await _questService.DeleteQuestAsync(id);
         }
     }
 }

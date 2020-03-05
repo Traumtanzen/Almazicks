@@ -38,9 +38,21 @@ namespace BusinessLogic.Services
             return _mapper.Map<IEnumerable<QuestDto>>(quests);
         }
 
-        public Task UpdateQuestAsync(int id, QuestDto quest)
+        //Don't know \_(O____O)_/ 
+        public async Task UpdateQuestAsync(int id, QuestDto quest)
         {
-            throw new NotImplementedException();
+            var newQuest = _mapper.Map<Quest>(quest);
+            newQuest.Id = id;
+            _context.Quests.Update(newQuest);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<string> DeleteQuestAsync(int id)
+        {
+            var quest = await _context.Quests.FindAsync(id);
+            _context.Quests.Remove(quest);
+            await _context.SaveChangesAsync();
+            return "Quest deleted!";
         }
     }
 }

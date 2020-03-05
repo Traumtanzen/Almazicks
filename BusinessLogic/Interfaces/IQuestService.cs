@@ -12,5 +12,6 @@ namespace BusinessLogic.Interfaces
         Task<IEnumerable<QuestDto>> GetQuestsAsync();
         Task CreateQuestAsync(QuestDto quest);
         Task UpdateQuestAsync(int id, QuestDto quest);
+        Task<string> DeleteQuestAsync(int id);
     }
 }
